@@ -46,7 +46,7 @@
     "lodash.reduce": "^4.6.0",
     "lodash.uniqueid": "^4.0.1",
     "mime": "^2.4.0",
-    "uuid": "^3.3.2",
+    "uuid": "^8.3.2",
     "xmlbuilder": "^11.0.1"
   },
   "devDependencies": {
