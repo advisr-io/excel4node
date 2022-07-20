@@ -45,7 +45,7 @@
     "lodash.isundefined": "^3.0.1",
     "lodash.reduce": "^4.6.0",
     "lodash.uniqueid": "^4.0.1",
-    "mime": "^2.4.0",
+    "mime": "^3.0.0",
     "uuid": "^3.3.2",
     "xmlbuilder": "^11.0.1"
   },
