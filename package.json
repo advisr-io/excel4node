@@ -54,7 +54,7 @@
     "babel-plugin-istanbul": "4.1.6",
     "babel-preset-env": "1.7.0",
     "babel-register": "6.26.0",
-    "jsdoc": "3.5.5",
+    "jsdoc": "3.6.11",
     "nyc": "12.0.2",
     "source-map-support": "0.5.11",
     "tape": "4.10.1",
