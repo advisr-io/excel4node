@@ -54,7 +54,7 @@
     "@babel/preset-env": "^7.18.9",
     "@babel/register": "^7.18.9",
     "babel-plugin-istanbul": "^6.1.1",
-    "jsdoc": "^3.6.10",
+    "jsdoc": "^4.0.0",
     "nyc": "^15.0.0",
     "source-map-support": "^0.5.21",
     "tape": "^5.5.3",
