@@ -52,14 +52,13 @@ test('Add Number to cell', (t) => {
 });
 
 test('Add Boolean to cell', (t) => {
-    t.plan(3);
+    t.plan(2);
     let wb = new xl.Workbook();
     let ws = wb.addWorksheet('test');
     let cell = ws.cell(1, 1).bool(true);
     let thisCell = ws.cells[cell.excelRefs[0]];
     t.ok(thisCell.t === 'b', 'cellType set to boolean');
-    t.ok(typeof (thisCell.v) === 'string', 'cell Value is a string');
-    t.ok(thisCell.v === 'true' || thisCell.v === 'false', 'Cell value value is correct');
+    t.ok(thisCell.v === true || thisCell.v === false, 'Cell value value is correct');
 });
 
 test('Add Formula to cell', (t) => {
