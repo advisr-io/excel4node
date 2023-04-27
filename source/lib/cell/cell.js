@@ -71,7 +71,9 @@ class Cell {
         if (this.f !== null) {
             cEle.ele('f').txt(this.f).up();
         }
-        if (this.v !== null) {
+        if (this.v === true || this.v === false) {
+            cEle.ele('v').txt(this.v ? '1' : '0').up();
+        } else if (this.v !== null) {
             cEle.ele('v').txt(this.v).up();
         }
         cEle.up();

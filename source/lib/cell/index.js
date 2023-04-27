@@ -84,22 +84,28 @@ function numberSetter(val) {
 }
 
 function booleanSetter(val) {
-    if (val === undefined || typeof (val.toString().toLowerCase() === 'true' || ((val.toString().toLowerCase() === 'false') ? false : val)) !== 'boolean') {
-        throw new TypeError(util.format('Value sent to Bool function of cells %s was not a bool, it has type of %s and value of %s',
-            JSON.stringify(this.excelRefs),
-            typeof (val),
-            val
-        ));
+    if (val !== true && val !== false) {
+        let valString = val.toString().toLowerCase();
+        if (valString === "true") {
+            val = true;
+        } else if (valString === "false") {
+            val = false;
+        } else {
+            throw new TypeError(util.format('Value sent to Bool function of cells %s was not a bool, it has type of %s and value of %s',
+                JSON.stringify(this.excelRefs),
+                typeof (val),
+                val
+            ));
+        }
     }
-    val = val.toString().toLowerCase() === 'true';
 
     if (!this.merged) {
         this.cells.forEach((c, i) => {
-            c.bool(val.toString());
+            c.bool(!!val);
         });
     } else {
         var c = this.cells[0];
-        c.bool(val.toString());
+        c.bool(!!val);
     }
     return this;
 }
