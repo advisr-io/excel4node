@@ -115,7 +115,7 @@ xl.PAPER_SIZE
 
 ## Workbook
 
-An instance of the Workbook class contains all data and parameters for the Excel Workbook.
+An instance of the Workbook class encapsulates all data and parameters for the Excel Workbook.
 
 #### Constructor
 
@@ -125,31 +125,39 @@ Workbook constructor accepts an optional configuration object.
 var xl = require('excel4node');
 var wb = new xl.Workbook({
   jszip: {
-    compression: 'DEFLATE',
+    compression: 'DEFLATE', // Specifies the compression method for the ZIP file ('STORE', 'DEFLATE').
   },
   defaultFont: {
-    size: 12,
-    name: 'Calibri',
-    color: 'FFFFFFFF',
+    size: 12, // Default font size.
+    name: 'Calibri', // Default font name.
+    color: 'FFFFFFFF', // Default font color.
   },
-  dateFormat: 'm/d/yy hh:mm:ss',
+  dateFormat: 'm/d/yy hh:mm:ss', // Default date format.
   workbookView: {
-    activeTab: 1, // Specifies an unsignedInt that contains the index to the active sheet in this book view.
-    autoFilterDateGrouping: true, // Specifies a boolean value that indicates whether to group dates when presenting the user with filtering options in the user interface.
-    firstSheet: 1, // Specifies the index to the first sheet in this book view.
-    minimized: false, // Specifies a boolean value that indicates whether the workbook window is minimized.
-    showHorizontalScroll: true, // Specifies a boolean value that indicates whether to display the horizontal scroll bar in the user interface.
-    showSheetTabs: true, // Specifies a boolean value that indicates whether to display the sheet tabs in the user interface.
-    showVerticalScroll: true, // Specifies a boolean value that indicates whether to display the vertical scroll bar.
-    tabRatio: 600, // Specifies ratio between the workbook tabs bar and the horizontal scroll bar.
-    visibility: 'visible', // Specifies visible state of the workbook window. ('hidden', 'veryHidden', 'visible') (§18.18.89)
-    windowHeight: 17620, // Specifies the height of the workbook window. The unit of measurement for this value is twips.
-    windowWidth: 28800, // Specifies the width of the workbook window. The unit of measurement for this value is twips..
-    xWindow: 0, // Specifies the X coordinate for the upper left corner of the workbook window. The unit of measurement for this value is twips.
-    yWindow: 440, // Specifies the Y coordinate for the upper left corner of the workbook window. The unit of measurement for this value is twips.
+    activeTab: 1, // Index of the active sheet in this book view.
+    autoFilterDateGrouping: true, // Indicates whether to group dates when presenting filtering options to the user.
+    firstSheet: 1, // Index of the first sheet in this book view.
+    minimized: false, // Specifies whether the workbook window is minimized.
+    showHorizontalScroll: true, // Indicates whether to display the horizontal scroll bar in the user interface.
+    showSheetTabs: true, // Indicates whether to display the sheet tabs in the user interface.
+    showVerticalScroll: true, // Indicates whether to display the vertical scroll bar in the user interface.
+    tabRatio: 600, // Ratio between the workbook tabs bar and the horizontal scroll bar.
+    visibility: 'visible', // Visibility state of the workbook window ('hidden', 'veryHidden', 'visible'). (§18.18.89)
+    windowHeight: 17620, // Height of the workbook window (measured in twips).
+    windowWidth: 28800, // Width of the workbook window (measured in twips).
+    xWindow: 0, // X-coordinate for the upper-left corner of the workbook window (measured in twips).
+    yWindow: 440, // Y-coordinate for the upper-left corner of the workbook window (measured in twips).
   },
-  logLevel: 0, // 0 - 5. 0 suppresses all logs, 1 shows errors only, 5 is for debugging
-  author: 'Microsoft Office User', // Name for use in features such as comments
+  logLevel: 0, // Log level (0-5). 0 suppresses all logs, 1 shows errors only, 5 is for debugging.
+  author: 'Microsoft Office User', // Name for use in features such as comments and file information. (Use 'author' when a single author) You can also provide a semicolon-separated string to include multiple authors (e.g., 'Author 1; Author 2').
+  authors: ['Author 1', 'Author 2'], // Names of authors, for use in features such as comments and file information. (Use 'authors' when are multiple authors).
+  title: 'Worksheet Title', // Title for the worksheet.
+  subject: 'Invoice Information - 2023-10-19', // Subject of the workbook.
+  company: 'Company, Inc.', // Name of the company for use in features such as comments and file information. (§22.2.2.21)
+  manager: 'Worksheet Manager', // Name for use in features such as comments and file information.
+  version: '1.0.0', // Version number of the workbook, which can be a text string representing the document's version, such as "1.0," "2.0," "Final Version," "Draft 2," etc.
+  revisionNumber: '2', // Revision number of the workbook, which can be a text string representing the document's revision number, such as "0," "1," "2," "A," "B," "Final Draft," "RC1," etc.
+  language: 'en-US' // BCP 47 language tag to represent the file language ('en-US', 'es-ES', 'pt-BR', etc.).
 });
 ```
 
