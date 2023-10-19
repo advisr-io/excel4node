@@ -615,7 +615,21 @@ let commentsXML = (ws) => {
         );
         commentsXml.att('xmlns', 'http://schemas.openxmlformats.org/spreadsheetml/2006/main');
 
-        commentsXml.ele('authors').ele('author').text(ws.wb.author);
+        const authors = ws.wb.author || ws.wb.authors;
+        if (Array.isArray(authors) && authors.length) {
+            authors.forEach(author => {
+                commentsXml.ele('authors').ele('author').text(author);
+            })
+        } else {
+            commentsXml.ele('authors').ele('author').text(authors);
+        }
+        commentsXml.ele('company', ws.wb.company);
+        commentsXml.ele('title', ws.wb.title);
+        commentsXml.ele('subject', ws.wb.subject);
+        commentsXml.ele('version', ws.wb.version);
+        commentsXml.ele('revisionNumber', ws.wb.revisionNumber);
+        commentsXml.ele('manager', ws.wb.manager);
+        commentsXml.ele('language', ws.wb.language);
 
         const commentList = commentsXml.ele('commentList');
         Object.keys(ws.comments).forEach(ref => {

@@ -18,7 +18,9 @@ function generateWorkbook() {
             xWindow: 240,
             yWindow: 480,
         },
-        author: 'Workbook Author Name'
+        author: 'Workbook Author Name',
+        company: 'Company, Inc.',
+        version: '1.0.0'
     });
 
     /*****************************************
