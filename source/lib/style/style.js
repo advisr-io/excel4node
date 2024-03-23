@@ -6,6 +6,7 @@ const Border = require('./classes/border.js');
 const Fill = require('./classes/fill.js');
 const Font = require('./classes/font.js');
 const NumberFormat = require('./classes/numberFormat.js');
+const Protection = require('./classes/protection.js');
 
 let _getFontId = (wb, font = {}) => {
 
@@ -142,7 +143,11 @@ let _getNumFmt = (wb, val) => {
             patternType: 'solid',
             color: 'Yellow'
         },
-        numberFormat: integer or string // §18.8.30 numFmt (Number Format)
+        numberFormat: integer or string, // §18.8.30 numFmt (Number Format)
+        protection: { // §18.8.1
+            hidden: boolean,
+            locked: boolean
+        },
     }
 */
 class Style {
@@ -158,6 +163,7 @@ class Style {
          * @param {Object} opts.border Options for creating a Border instance
          * @param {Object} opts.fill Options for creating a Fill instance
          * @param {String} opts.numberFormat
+         * @param {Object} opts.protection Options for creating a Protection instance
          * @property {Alignment} alignment Alignment instance associated with Style
          * @property {Border} border Border instance associated with Style
          * @property {Number} borderId ID of Border instance in the Workbook
@@ -166,6 +172,7 @@ class Style {
          * @property {Font} font Font instance associated with Style
          * @property {Number} fontId ID of Font instance in the Workbook
          * @property {String} numberFormat String represenation of the way a number should be formatted
+         * @property {Protection} protection Protection instance associated with Style
          * @property {Number} xf XF id of the Style in the Workbook
          * @returns {Style} 
          */
@@ -200,6 +207,10 @@ class Style {
 
         if (opts.pivotButton !== undefined) {
             this.pivotButton = null; // attribute boolean
+        }
+
+        if (opts.protection !== undefined) {
+            this.protection = new Protection(opts.protection);
         }
 
         if (opts.quotePrefix !== undefined) {
@@ -240,6 +251,11 @@ class Style {
             thisXF.alignment = this.alignment;
         }
 
+        if (this.protection instanceof Protection) {
+            thisXF.applyProtection = 1;
+            thisXF.protection = this.protection;
+        }
+
         return thisXF;
     }
 
@@ -273,9 +289,13 @@ class Style {
         if (this.alignment instanceof Alignment) {
             obj.alignment = this.alignment.toObject();
         }
-
+        
         if (this.pivotButton !== undefined) {
             obj.pivotButton = this.pivotButton;
+        }
+        
+        if (this.protection instanceof Protection) {
+            obj.protection = this.protection.toObject();
         }
 
         if (this.quotePrefix !== undefined) {
@@ -295,7 +315,7 @@ class Style {
         let thisEle = ele.ele('xf');
         let thisXF = this.xf;
         Object.keys(thisXF).forEach((a) => {
-            if (a === 'alignment') {
+            if (a === 'alignment' || a === 'protection') {
                 thisXF[a].addToXMLele(thisEle);
             } else {
                 thisEle.att(a, thisXF[a]);
@@ -327,9 +347,13 @@ class Style {
         if (this.alignment instanceof Alignment) {
             this.alignment.addToXMLele(thisEle);
         }
-
+        
         if (this.border instanceof Border) {
             this.border.addToXMLele(thisEle);
+        }
+        
+        if (this.protection instanceof Protection) {
+            this.protection.addToXMLele(thisEle);
         }
     }
 }
