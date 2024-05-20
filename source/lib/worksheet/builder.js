@@ -530,11 +530,11 @@ let sheetXML = (ws) => {
         .then(_addHyperlinks)
         .then(_addPrintOptions)
         .then(_addPageMargins)
-        .then(_addLegacyDrawing)
         .then(_addPageSetup)
         .then(_addPageBreaks)
         .then(_addHeaderFooter)
         .then(_addDrawing)
+        .then(_addLegacyDrawing)
         .then((promiseObj) => {
             return new Promise((resolve, reject) => {
                 wsXML.end();
