@@ -238,13 +238,14 @@ class Workbook {
      * @returns {Style}
      */
     createStyle(opts) {
-        const thisStyle = new Style(this, opts);
-        const lookupKey = JSON.stringify(thisStyle.toObject());
+        const lookupKey = JSON.stringify(opts);
 
         // Use existing style if one exists
         if (this.stylesLookup.get(lookupKey)) {
             return this.stylesLookup.get(lookupKey);
         }
+        
+        const thisStyle = new Style(this, opts);
 
         this.stylesLookup.set(lookupKey, thisStyle);
         const index = this.styles.push(thisStyle) - 1;
