@@ -1,5 +1,4 @@
-// const uuid = require('uuid/v4');
-const { v4: uuid } = require('uuid');
+const { randomUUID } = require('crypto');
 const utils = require('../utils');
 
 // §18.7.3 Comment
@@ -7,7 +6,7 @@ class Comment {
     constructor(ref, comment, options = {}) {
         this.ref = ref;
         this.comment = comment;
-        this.uuid = '{' + uuid().toUpperCase() + '}';
+        this.uuid = '{' + randomUUID().toUpperCase() + '}';
         this.row = utils.getExcelRowCol(ref).row;
         this.col = utils.getExcelRowCol(ref).col;
         this.marginLeft = options.marginLeft || ((this.col) * 88 + 8) + 'pt';
